@@ -1,0 +1,44 @@
+@import "tailwindcss";
+@variant dark (&:is(.dark *)); /* Ngasih tau Tailwind v4 buat merespon class .dark */
+
+:root {
+  --background: #f8fafc; /* Warna dasar terang (Slate 50) */
+  --foreground: #0f172a; /* Warna teks gelap */
+  --neon-blue: #0ea5e9;
+}
+
+.dark {
+  --background: #0f172a; /* Warna dasar gelap */
+  --foreground: #f8fafc; /* Warna teks terang */
+  --neon-blue: #38bdf8;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+/* Fitur Gulir Estetik */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--neon-blue);
+  border-radius: 10px;
+  box-shadow: 0 0 5px var(--neon-blue);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7dd3fc;
+}
+
+/* Efek Kotak Neon */
+.neon-glow {
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3), 0 0 20px rgba(56, 189, 248, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+.neon-glow:hover {
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 0 30px rgba(56, 189, 248, 0.4);
+}
