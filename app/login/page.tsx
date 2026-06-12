@@ -20,12 +20,18 @@ export default function LoginPage() {
         {/* Kolom Kiri: Visual Branding */}
         <div className="w-full md:w-1/2 p-12 hidden md:flex flex-col justify-between relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-r border-slate-700/50">
           <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-6">
-               {/* Gunakan logo RD PDF abang di sini */}
-              <div className="w-12 h-12 bg-sky-500 rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(14,165,233,0.5)]">
-                <GraduationCap className="text-white" size={28} />
+           <div className="flex items-center gap-4 mb-6">
+              {/* Kontainer Logo dengan ukuran yang dikunci (relative, w-16, h-16) */}
+              <div className="relative w-16 h-16 flex-shrink-0">
+                <Image
+                  src="/logo rd-pdf.png" // Sesuaikan dengan nama file logo abang di folder public
+                  alt="Logo RD PDF"
+                  fill
+                  className="object-contain drop-shadow-[0_0_15px_rgba(14,165,233,0.5)]"
+                  priority
+                />
               </div>
-              <h1 className="text-2xl font-extrabold text-white tracking-wider drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
+              <h1 className="text-3xl font-extrabold text-white tracking-wider drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
                 RD PDF
               </h1>
             </div>
