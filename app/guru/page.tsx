@@ -1,135 +1,135 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Search, Edit, Trash2, Users, Filter } from "lucide-react";
+import { Plus, Search, Edit, UploadCloud, Copy, Printer, FileSpreadsheet, Eye, EyeOff, UserX } from "lucide-react";
 
 export default function GuruPage() {
-  // Data dummy guru
+  // Data dummy sesuai referensi dengan tambahan field
   const [dummyGuru] = useState([
-    { id: 1, niy: "198001012005011001", nama: "K.H. Furqon Arifin", jk: "L", status: "Aktif" },
-    { id: 2, niy: "198502022010011002", nama: "Ust. Ahmad Fauzi", jk: "L", status: "Aktif" },
-    { id: 3, niy: "-", nama: "Ustazah Siti Aminah", jk: "P", status: "Aktif" },
-    { id: 4, niy: "199004042015011004", nama: "Ust. Hamzah", jk: "L", status: "Aktif" },
-    { id: 5, niy: "-", nama: "Ust. Zulkifli", jk: "L", status: "Cuti" },
+    { id: 1, niy: "131232040111017", nama: "AANG NURHIDAYAT, S.Pd.I", jk: "L", ttl: "Bandung, 13 Juni 1991", pendidikan: "Sarjana (S1)", password: "password123", wali: "-", jtm: "-", status: "Aktif" },
+    { id: 2, niy: "131232040111027", nama: "ACENG FAJRI MUHAMMAD SATIBI", jk: "L", ttl: "Bandung, 13 Juni 1991", pendidikan: "Sarjana (S1)", password: "password123", wali: "-", jtm: "-", status: "Aktif" },
+    { id: 3, niy: "131232040111006", nama: "AD RIMA WIDIANINGSIH, S.Pd.I", jk: "P", ttl: "Bandung, 13 Juni 1991", pendidikan: "Sarjana (S1)", password: "password123", wali: "X.A", jtm: "39", status: "Aktif" },
+    { id: 4, niy: "131232040111024", nama: "CIBUNG CHANDRA SAKTI", jk: "L", ttl: "Bandung, 10 Agustus 1987", pendidikan: "Sarjana (S1)", password: "password123", wali: "XI.", jtm: "39", status: "Aktif" },
   ]);
+
+  // State untuk toggle visibilitas password (simulasi)
+  const [showPassword, setShowPassword] = useState<number | null>(null);
 
   return (
     <main className="flex-1 ml-64 p-8 bg-slate-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
       
       {/* Header Halaman */}
       <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-violet-600 rounded-xl text-white shadow-lg shadow-violet-500/20">
-            <Users size={24} />
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold text-slate-800 dark:text-white">Data Guru</h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Kelola direktori tenaga pendidik Pendidikan Diniyah Formal</p>
-          </div>
+        <div>
+          <h2 className="text-3xl font-bold text-slate-800 dark:text-white">Data Guru</h2>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Master Data</p>
         </div>
         
-        <button className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white px-5 py-2.5 rounded-xl shadow-lg shadow-violet-500/20 transition-all font-bold text-sm active:scale-95">
-          <Plus size={18} />
-          Tambah Guru
-        </button>
+        <div className="flex gap-3">
+          <button className="flex items-center gap-2 bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-lg shadow-sm transition-all text-sm font-medium">
+            <UploadCloud size={16} /> Upload Guru
+          </button>
+          <button className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded-lg shadow-sm transition-all text-sm font-medium">
+            <Plus size={16} /> Tambah
+          </button>
+        </div>
       </header>
 
       {/* Area Konten Utama */}
       <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
         
-        {/* Toolbar Filter & Search */}
-        <div className="p-5 border-b border-slate-200 dark:border-slate-700 flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-50/50 dark:bg-slate-800/50">
-          <div className="relative w-full md:w-80">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-            <input 
-              type="text" 
-              placeholder="Cari nama guru atau NIP/NIY..." 
-              className="w-full pl-10 pr-4 py-2.5 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-500 dark:text-slate-200 transition-all shadow-sm"
-            />
+        {/* Toolbar Export & Search */}
+        <div className="p-4 border-b border-slate-200 dark:border-slate-700 flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-50/50 dark:bg-slate-800/50">
+          
+          {/* Tombol Export */}
+          <div className="flex items-center gap-2">
+            <button className="flex items-center gap-1.5 px-3 py-1.5 border border-slate-300 dark:border-slate-600 rounded-md text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+              <Copy size={14} /> Copy
+            </button>
+            <button className="flex items-center gap-1.5 px-3 py-1.5 border border-slate-300 dark:border-slate-600 rounded-md text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+              <Printer size={14} /> Print
+            </button>
+            <button className="flex items-center gap-1.5 px-3 py-1.5 border border-slate-300 dark:border-slate-600 rounded-md text-xs font-medium text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-colors">
+              <FileSpreadsheet size={14} /> Excel
+            </button>
+            
+            <div className="ml-4 flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+                <span>Show</span>
+                <select className="border border-slate-300 dark:border-slate-600 rounded bg-white dark:bg-slate-900 px-2 py-1 text-xs outline-none">
+                    <option>10</option>
+                    <option>25</option>
+                    <option>50</option>
+                </select>
+                <span>entries</span>
+            </div>
           </div>
 
-          <div className="flex items-center gap-4 w-full md:w-auto">
-            <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-                <Filter size={16} /> <span className="hidden sm:inline">Filter:</span>
-            </div>
-            <select className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-sm px-3 py-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-500 dark:text-slate-200 cursor-pointer">
-                <option>Semua Status</option>
-                <option>Aktif</option>
-                <option>Cuti / Non-Aktif</option>
-            </select>
-            <select className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-sm px-3 py-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-500 dark:text-slate-200 cursor-pointer">
-                <option>Semua Gender</option>
-                <option>Laki-laki</option>
-                <option>Perempuan</option>
-            </select>
+          {/* Search */}
+          <div className="relative w-full md:w-64">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+            <input 
+              type="text" 
+              placeholder="Search..." 
+              className="w-full pl-9 pr-3 py-1.5 text-sm bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-md focus:outline-none focus:ring-1 focus:ring-violet-500 dark:text-slate-200 transition-all"
+            />
           </div>
         </div>
 
-        {/* Tabel Data Guru */}
+        {/* Tabel Data Guru (Bisa di-scroll horizontal kalau sempit) */}
         <div className="overflow-x-auto">
-          <table className="w-full text-sm text-left">
+          <table className="w-full text-sm text-left whitespace-nowrap">
             <thead>
-              <tr className="text-xs text-slate-500 dark:text-slate-400 uppercase bg-slate-50/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-700 font-bold tracking-wider">
-                <th className="px-6 py-5">NIP / NIY</th>
-                <th className="px-6 py-5">Nama Lengkap</th>
-                <th className="px-6 py-5 text-center">L/P</th>
-                <th className="px-6 py-5">Status</th>
-                <th className="px-6 py-5 text-center">Aksi</th>
+              <tr className="text-xs text-slate-500 dark:text-slate-400 uppercase bg-slate-50/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-700 font-semibold tracking-wide">
+                <th className="px-4 py-3 w-10 text-center">No</th>
+                <th className="px-4 py-3 text-center">Foto</th>
+                <th className="px-4 py-3">NIK/NUPTK/NIY</th>
+                <th className="px-4 py-3">Nama Lengkap</th>
+                <th className="px-4 py-3 text-center">L/P</th>
+                <th className="px-4 py-3">TTL</th>
+                <th className="px-4 py-3">Pendidikan</th>
+                <th className="px-4 py-3">Password</th>
+                <th className="px-4 py-3">Wali Kelas</th>
+                <th className="px-4 py-3 text-center">JTM</th>
+                <th className="px-4 py-3 text-center">Aksi</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-700/50">
-              {dummyGuru.map((item) => (
-                <tr key={item.id} className="hover:bg-violet-50/30 dark:hover:bg-violet-900/10 transition-colors group">
-                  <td className="px-6 py-4 font-mono text-xs text-slate-500 dark:text-slate-400">
-                    {item.niy !== "-" ? item.niy : <span className="text-slate-300 dark:text-slate-600 italic">Kosong</span>}
+              {dummyGuru.map((item, index) => (
+                <tr key={item.id} className="hover:bg-violet-50/30 dark:hover:bg-violet-900/10 transition-colors">
+                  <td className="px-4 py-3 text-center text-slate-500 dark:text-slate-400">{index + 1}</td>
+                  
+                  {/* Kolom Foto (Inisial) */}
+                  <td className="px-4 py-3 text-center">
+                    <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400 flex items-center justify-center font-bold text-xs mx-auto">
+                        {item.nama.charAt(0)}
+                    </div>
                   </td>
-                  <td className="px-6 py-4">
-                    <span className="font-bold text-slate-800 dark:text-slate-200 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
-                        {item.nama}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-center">
-                    <span className={`inline-flex items-center justify-center w-6 h-6 rounded-md text-xs font-bold ${
-                        item.jk === 'L' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-400' : 'bg-pink-100 text-pink-700 dark:bg-pink-900/50 dark:text-pink-400'
-                    }`}>
-                        {item.jk}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className={`px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest ${
-                      item.status === 'Aktif' 
-                        ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400' 
-                        : 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400'
-                    }`}>
-                      {item.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex justify-center gap-2">
-                        <button className="p-2 rounded-lg text-slate-400 hover:bg-violet-50 hover:text-violet-600 dark:hover:bg-violet-900/20 transition-all" title="Edit Data">
-                            <Edit size={18} />
-                        </button>
-                        <button className="p-2 rounded-lg text-slate-400 hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-900/20 transition-all" title="Hapus Data">
-                            <Trash2 size={18} />
+
+                  <td className="px-4 py-3 font-mono text-xs text-slate-600 dark:text-slate-400">{item.niy}</td>
+                  <td className="px-4 py-3 font-medium text-slate-800 dark:text-slate-200">{item.nama}</td>
+                  <td className="px-4 py-3 text-center">{item.jk}</td>
+                  <td className="px-4 py-3 text-slate-600 dark:text-slate-400 text-xs">{item.ttl}</td>
+                  <td className="px-4 py-3 text-slate-600 dark:text-slate-400 text-xs">{item.pendidikan}</td>
+                  
+                  {/* Kolom Password */}
+                  <td className="px-4 py-3">
+                    <div className="flex items-center gap-2">
+                        <span className="font-mono text-xs text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">
+                            {showPassword === item.id ? item.password : '••••••••'}
+                        </span>
+                        <button 
+                            onClick={() => setShowPassword(showPassword === item.id ? null : item.id)}
+                            className="text-slate-400 hover:text-violet-500 transition-colors"
+                        >
+                            {showPassword === item.id ? <EyeOff size={14} /> : <Eye size={14} />}
                         </button>
                     </div>
                   </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
 
-        {/* Footer Info */}
-        <div className="p-5 border-t border-slate-100 dark:border-slate-700 bg-slate-50/30 dark:bg-slate-800/30 flex justify-between items-center">
-          <p className="text-xs text-slate-500 dark:text-slate-400">Menampilkan 5 data guru</p>
-          <div className="flex gap-2">
-            <button className="px-3 py-1 text-xs border border-slate-200 dark:border-slate-700 rounded-lg text-slate-400 cursor-not-allowed">Previous</button>
-            <button className="px-3 py-1 text-xs border border-slate-200 dark:border-slate-700 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 transition-all">Next</button>
-          </div>
-        </div>
-
-      </div>
-    </main>
-  );
-}
+                  <td className="px-4 py-3 font-medium text-slate-700 dark:text-slate-300">{item.wali}</td>
+                  <td className="px-4 py-3 text-center font-medium text-slate-700 dark:text-slate-300">{item.jtm}</td>
+                  
+                  {/* Kolom Aksi */}
+                  <td className="px-4 py-3">
+                    <div className="flex justify-center gap-1.5">
+                        <button className="flex items-center gap-1 bg-violet-100 hover:bg-violet-200 text-violet-700 dark:bg-violet-900/30 dark:hover
