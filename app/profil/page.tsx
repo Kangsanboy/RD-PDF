@@ -1,9 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { Upload, RefreshCw, Save, AlertCircle, KeyRound, Building, UserCheck } from "lucide-react";
+import { useState } from "react";
+import { Upload, Save, KeyRound, Building, UserCheck, Edit2, X } from "lucide-react";
 
 export default function ProfilPage() {
+  // State untuk mengatur mode edit data lembaga
+  const [isEditingLembaga, setIsEditingLembaga] = useState(false);
+
   return (
     <main className="flex-1 ml-64 p-8 bg-slate-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
       
@@ -13,16 +17,15 @@ export default function ProfilPage() {
         <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Kelola informasi data lembaga dan akun administrator</p>
       </header>
 
-      {/* Grid Layout (Kiri 1 Kolom, Kanan 2 Kolom di layar besar) */}
+      {/* Grid Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         {/* ================= KOLOM KIRI ================= */}
         <div className="space-y-8">
           
-          {/* Kartu Logo & Info Singkat */}
+          {/* Kartu Logo */}
           <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6 flex flex-col items-center text-center">
             <div className="relative w-32 h-32 mb-4 bg-slate-100 dark:bg-slate-700 rounded-2xl p-2 border-2 border-dashed border-slate-300 dark:border-slate-600 flex items-center justify-center">
-              {/* Kita pakai logo RD PDF yang udah abang simpan sebelumnya */}
               <Image 
                 src="/logo rd-pdf.png" 
                 alt="Logo Lembaga" 
@@ -35,16 +38,11 @@ export default function ProfilPage() {
             </h3>
             <span className="text-sm text-blue-600 dark:text-blue-400 font-medium mb-6">Proktor</span>
             
-            <div className="flex w-full gap-3">
-              <button className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg text-sm font-medium transition-all shadow-sm">
-                <Upload size={16} /> Upload Logo
-              </button>
-              <button className="flex items-center justify-center gap-2 border border-blue-600 text-blue-600 hover:bg-blue-50 dark:border-blue-500 dark:text-blue-400 dark:hover:bg-slate-700 px-4 py-2 rounded-lg text-sm font-medium transition-all">
-                <RefreshCw size={16} /> Sync
-              </button>
-            </div>
+            <button className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg text-sm font-medium transition-all shadow-sm">
+              <Upload size={16} /> Upload Logo Baru
+            </button>
             <p className="text-xs text-slate-400 mt-4 bg-slate-50 dark:bg-slate-900/50 p-2 rounded-lg w-full border border-slate-100 dark:border-slate-700">
-              Agar proses cetak rapor tidak lambat, gunakan logo dengan ukuran kecil maksimal 200x200 px.
+              Gunakan logo dengan ukuran maksimal 200x200 px agar cetak rapor tidak lambat.
             </p>
           </div>
 
@@ -76,57 +74,66 @@ export default function ProfilPage() {
         {/* ================= KOLOM KANAN ================= */}
         <div className="lg:col-span-2 space-y-6">
           
-          {/* Banner Peringatan Info */}
-          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700/50 rounded-2xl p-5 flex items-start gap-4 shadow-sm">
-            <div className="bg-amber-100 dark:bg-amber-800/50 p-2 rounded-full mt-0.5">
-              <AlertCircle size={20} className="text-amber-600 dark:text-amber-400" />
-            </div>
-            <div>
-              <h3 className="text-amber-800 dark:text-amber-300 font-bold text-sm mb-1">Info Perubahan Data</h3>
-              <p className="text-amber-700/80 dark:text-amber-400/80 text-sm leading-relaxed">
-                Untuk melakukan perubahan data lembaga, silakan konfirmasi perubahan data pada HD Kabupaten atau HD Provinsi. Lakukan sinkronisasi profil (tombol Sync) jika perubahan data sudah dilakukan.
-              </p>
-            </div>
-          </div>
-
           {/* Kartu Detail Data Lembaga */}
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
-            <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 flex items-center gap-2">
-              <Building size={18} className="text-slate-500 dark:text-slate-400" />
-              <h3 className="font-semibold text-slate-700 dark:text-slate-200 text-sm">Data Detail Lembaga</h3>
+          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden transition-all duration-300">
+            <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Building size={18} className="text-slate-500 dark:text-slate-400" />
+                <h3 className="font-semibold text-slate-700 dark:text-slate-200 text-sm">Data Detail Lembaga</h3>
+              </div>
+              
+              {/* Tombol Toggle Edit Data */}
+              <button 
+                onClick={() => setIsEditingLembaga(!isEditingLembaga)}
+                className={`flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-lg transition-all ${
+                  isEditingLembaga 
+                    ? "bg-rose-100 text-rose-600 hover:bg-rose-200 dark:bg-rose-900/30 dark:text-rose-400" 
+                    : "bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/30 dark:text-blue-400"
+                }`}
+              >
+                {isEditingLembaga ? <><X size={14}/> Batal Edit</> : <><Edit2 size={14}/> Edit Data</>}
+              </button>
             </div>
             
             <div className="p-0">
               <ul className="divide-y divide-slate-100 dark:divide-slate-700/50">
-                <li className="flex flex-col sm:flex-row sm:items-center px-6 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                  <span className="text-sm font-medium text-slate-500 w-48">Nama Lembaga</span>
-                  <span className="text-sm font-semibold text-slate-800 dark:text-slate-200 mt-1 sm:mt-0">MAS AL-JAWAHIR</span>
-                </li>
-                <li className="flex flex-col sm:flex-row sm:items-center px-6 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                  <span className="text-sm font-medium text-slate-500 w-48">NSM / NSPP</span>
-                  <span className="text-sm text-slate-700 dark:text-slate-300 mt-1 sm:mt-0">131232040111</span>
-                </li>
-                <li className="flex flex-col sm:flex-row sm:items-center px-6 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                  <span className="text-sm font-medium text-slate-500 w-48">NPSN</span>
-                  <span className="text-sm text-slate-700 dark:text-slate-300 mt-1 sm:mt-0">69976325</span>
-                </li>
-                <li className="flex flex-col sm:flex-row sm:items-center px-6 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                  <span className="text-sm font-medium text-slate-500 w-48">Alamat</span>
-                  <span className="text-sm text-slate-700 dark:text-slate-300 mt-1 sm:mt-0">JL. LEMBUR TEGAL</span>
-                </li>
-                <li className="flex flex-col sm:flex-row sm:items-center px-6 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                  <span className="text-sm font-medium text-slate-500 w-48">Kecamatan</span>
-                  <span className="text-sm text-slate-700 dark:text-slate-300 mt-1 sm:mt-0">SOREANG</span>
-                </li>
-                <li className="flex flex-col sm:flex-row sm:items-center px-6 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                  <span className="text-sm font-medium text-slate-500 w-48">Kabupaten/Kota</span>
-                  <span className="text-sm text-slate-700 dark:text-slate-300 mt-1 sm:mt-0">KABUPATEN BANDUNG</span>
-                </li>
-                <li className="flex flex-col sm:flex-row sm:items-center px-6 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                  <span className="text-sm font-medium text-slate-500 w-48">Provinsi</span>
-                  <span className="text-sm text-slate-700 dark:text-slate-300 mt-1 sm:mt-0">JAWA BARAT</span>
-                </li>
+                
+                {/* Form Item Component (Supaya Kodenya Rapi) */}
+                {[
+                  { label: "Nama Lembaga", value: "MAS AL-JAWAHIR" },
+                  { label: "NSM / NSPP", value: "131232040111" },
+                  { label: "NPSN", value: "69976325" },
+                  { label: "Alamat", value: "JL. LEMBUR TEGAL" },
+                  { label: "Kecamatan", value: "SOREANG" },
+                  { label: "Kabupaten/Kota", value: "KABUPATEN BANDUNG" },
+                  { label: "Provinsi", value: "JAWA BARAT" },
+                ].map((item, index) => (
+                  <li key={index} className="flex flex-col sm:flex-row sm:items-center px-6 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <span className="text-sm font-medium text-slate-500 w-48">{item.label}</span>
+                    {isEditingLembaga ? (
+                      <input 
+                        type="text" 
+                        defaultValue={item.value} 
+                        className="flex-1 mt-1 sm:mt-0 px-3 py-1.5 text-sm bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white transition-all shadow-sm"
+                      />
+                    ) : (
+                      <span className="text-sm font-semibold text-slate-800 dark:text-slate-200 mt-1 sm:mt-0">{item.value}</span>
+                    )}
+                  </li>
+                ))}
               </ul>
+
+              {/* Munculkan tombol simpan HANYA saat mode edit aktif */}
+              {isEditingLembaga && (
+                <div className="p-5 border-t border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 flex justify-end">
+                  <button 
+                    onClick={() => setIsEditingLembaga(false)}
+                    className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg text-sm font-medium transition-all shadow-sm"
+                  >
+                    <Save size={16} /> Simpan Data Lembaga
+                  </button>
+                </div>
+              )}
             </div>
           </div>
 
@@ -156,7 +163,7 @@ export default function ProfilPage() {
               </div>
               <div className="pt-2 border-t border-slate-100 dark:border-slate-700 flex justify-end">
                 <button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg text-sm font-medium transition-all shadow-sm">
-                  <Save size={16} /> Simpan Perubahan
+                  <Save size={16} /> Simpan Pimpinan
                 </button>
               </div>
             </div>
