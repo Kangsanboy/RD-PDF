@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import Image from 'next/image'; // Tambahan untuk manggil gambar logo
+import Image from 'next/image';
 import { useState } from 'react';
 import { 
   LayoutDashboard, 
@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 
 export default function Sidebar() {
-  const [openMenu, setOpenMenu] = useState<string | null>('Guru');
+  const [openMenu, setOpenMenu] = useState<string | null>('Siswa'); // Default buka menu Siswa biar gampang ngecek
 
   const toggleMenu = (menu: string) => {
     setOpenMenu(openMenu === menu ? null : menu);
@@ -29,8 +29,6 @@ export default function Sidebar() {
       
       {/* Area Header (Logo & Tahun Ajaran) */}
       <div className="p-5 border-b border-slate-200 dark:border-slate-700 flex flex-col items-center justify-center gap-4">
-        
-        {/* Tempat Logo Gambar */}
         <div className="relative w-full h-16">
           <Image
             src="/logo rd-pdf.png"
@@ -40,8 +38,6 @@ export default function Sidebar() {
             priority
           />
         </div>
-
-        {/* Tahun Ajaran Hijriyah */}
         <div className="bg-sky-50 dark:bg-slate-800 text-sky-700 dark:text-sky-400 text-[10px] font-extrabold py-1.5 px-4 rounded-full border border-sky-200 dark:border-slate-600 tracking-widest shadow-sm">
           TAHUN AJARAN 1447/1448 H
         </div>
@@ -53,7 +49,7 @@ export default function Sidebar() {
         {/* === MAIN MENU === */}
         <ul className="space-y-1 mb-6 px-3">
           <li>
-            <Link href="/" className="flex items-center gap-3 px-3 py-2.5 text-sm rounded-lg bg-blue-600 text-white shadow-md dark:shadow-none dark:bg-blue-600/90 transition-all">
+            <Link href="/" className="flex items-center gap-3 px-3 py-2.5 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all">
               <LayoutDashboard size={18} />
               <span className="font-medium">Dashboard</span>
             </Link>
@@ -98,7 +94,7 @@ export default function Sidebar() {
               {openMenu === 'Guru' && (
                 <ul className="mt-1 ml-9 space-y-1">
                   <li><Link href="/guru" className="block px-3 py-2 text-sm text-slate-600 dark:text-slate-400 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Data Guru</Link></li>
-                  <li><Link href="/mengajar" className="block px-3 py-2 text-sm text-blue-700 dark:text-blue-400 font-medium bg-blue-50 dark:bg-slate-800/50 rounded-lg transition-colors">Mengajar</Link></li>
+                  <li><Link href="/mengajar" className="block px-3 py-2 text-sm text-slate-600 dark:text-slate-400 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Mengajar</Link></li>
                 </ul>
               )}
             </li>
@@ -117,7 +113,7 @@ export default function Sidebar() {
                   <li><Link href="/riwayat" className="block px-3 py-2 text-sm text-slate-600 dark:text-slate-400 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Riwayat Siswa</Link></li>
                   <li><Link href="/pindah" className="block px-3 py-2 text-sm text-slate-600 dark:text-slate-400 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Pindah Kelas</Link></li>
                   <li><Link href="/naik" className="block px-3 py-2 text-sm text-slate-600 dark:text-slate-400 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Naik Kelas</Link></li>
-                  <li><Link href="/alumni" className="block px-3 py-2 text-sm text-slate-600 dark:text-slate-400 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Data Alumni</Link></li>
+                  {/* Menu Data Alumni resmi kita hapus dari sini */}
                 </ul>
               )}
             </li>
