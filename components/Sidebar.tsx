@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 
 export default function Sidebar() {
-  const [openMenu, setOpenMenu] = useState<string | null>('Siswa'); // Default buka menu Siswa biar gampang ngecek
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
 
   const toggleMenu = (menu: string) => {
     setOpenMenu(openMenu === menu ? null : menu);
