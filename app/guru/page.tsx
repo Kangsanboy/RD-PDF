@@ -132,4 +132,35 @@ export default function GuruPage() {
                   {/* Kolom Aksi */}
                   <td className="px-4 py-3">
                     <div className="flex justify-center gap-1.5">
-                        <button className="flex items-center gap-1 bg-violet-100 hover:bg-violet-200 text-violet-700 dark:bg-violet-900/30 dark:hover
+                        <button className="flex items-center gap-1 bg-violet-100 hover:bg-violet-200 text-violet-700 dark:bg-violet-900/30 dark:hover:bg-violet-900/50 dark:text-violet-400 px-2.5 py-1.5 rounded text-xs font-semibold transition-colors">
+                            <Edit size={12} /> Edit
+                        </button>
+                        <button className="flex items-center gap-1 bg-rose-100 hover:bg-rose-200 text-rose-700 dark:bg-rose-900/30 dark:hover:bg-rose-900/50 dark:text-rose-400 px-2.5 py-1.5 rounded text-xs font-semibold transition-colors">
+                            <UserX size={12} /> Non Aktif
+                        </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Footer Pagination */}
+        <div className="p-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 flex justify-between items-center text-xs">
+          <p className="text-slate-500 dark:text-slate-400">Showing 1 to 4 of 31 entries</p>
+          <div className="flex bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-md overflow-hidden">
+            <button className="px-3 py-1.5 border-r border-slate-200 dark:border-slate-700 text-slate-400 cursor-not-allowed">First</button>
+            <button className="px-3 py-1.5 border-r border-slate-200 dark:border-slate-700 text-slate-400 cursor-not-allowed">Previous</button>
+            <button className="px-3 py-1.5 bg-violet-50 dark:bg-violet-900/20 text-violet-600 dark:text-violet-400 font-bold border-r border-slate-200 dark:border-slate-700">1</button>
+            <button className="px-3 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 border-r border-slate-200 dark:border-slate-700 transition-colors">2</button>
+            <button className="px-3 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 border-r border-slate-200 dark:border-slate-700 transition-colors">3</button>
+            <button className="px-3 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 border-r border-slate-200 dark:border-slate-700 transition-colors">Next</button>
+            <button className="px-3 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">Last</button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  );
+}
