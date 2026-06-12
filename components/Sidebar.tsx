@@ -131,7 +131,6 @@ export default function Sidebar() {
                   <li><Link href="/pengaturan-cetak" className="block px-3 py-2 text-sm text-slate-600 dark:text-slate-400 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Pengaturan Cetak</Link></li>
                   <li><Link href="/status-nilai" className="block px-3 py-2 text-sm text-slate-600 dark:text-slate-400 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Status Nilai</Link></li>
                   <li><Link href="/cetak-rapor" className="block px-3 py-2 text-sm text-slate-600 dark:text-slate-400 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Cetak Rapor</Link></li>
-                  <li><Link href="/kirim-nilai" className="block px-3 py-2 text-sm text-slate-600 dark:text-slate-400 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Kirim Nilai</Link></li>
                 </ul>
               )}
             </li>
