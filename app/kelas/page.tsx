@@ -122,7 +122,3 @@ export default function KelasPage() {
     </main>
   );
 }
-
-Coba bang klik menu **Lembaga > Kelas** di browser. Tampilannya sekarang pakai aksen warna **Emerald (Hijau)** biar beda sama menu Mapel yang Biru. 
-
-Gimana bang, makin gagah kan? Kalau sudah oke, kita lanjut ngerakit menu **Data Guru** nih?
